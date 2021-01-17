@@ -7,6 +7,7 @@ import { LoginComponent } from './components/account/login/login.component';
 import { SignupComponent } from './components/account/signup/signup.component';
 import { HomeComponent } from './components/layouts/home/home.component';
 import { AuthenticationComponent } from './components/layouts/authentication/authentication.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuthenticationComponent } from './components/layouts/authentication/aut
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

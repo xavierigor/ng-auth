@@ -1,1 +1,18 @@
-<p>signup works!</p>
+<h2 class="text-center">Criar conta</h2>
+
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+    <div class="form-group">
+        <label for="name">Nome</label>
+        <input [(ngModel)]="account.name" type="text" id="name" name="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input [(ngModel)]="account.email" type="email" id="email" name="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Senha</label>
+        <input [(ngModel)]="account.password" type="password" id="password" name="password" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="form.form.invalid">Criar minha conta</button>
+    <button type="button" class="btn btn-link btn-block" [routerLink]="['/login']">Já possui uma conta? Entrar</button>
+</form>
