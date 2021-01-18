@@ -14,13 +14,17 @@ export class SignupComponent implements OnInit {
     password: ''
   }
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
   async onSubmit() {
-    
+    try {
+      const result = await this.accountService.signUp(this.account);
+    } catch (error) {
+      console.log('Houve um erro', error);
+    }
   }
 
 }

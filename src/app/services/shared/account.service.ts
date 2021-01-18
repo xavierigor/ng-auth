@@ -1,24 +1,31 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  login(user: any) {
-    // simulando request pois ainda não existe backend implementado
-    return new Promise(resolve => {
-      window.localStorage.setItem('token', 'meu-token');
-      resolve(true);
-    })
+  async login(user: any) {
+    // é possível fazer dessa maneira ou com o .subscribe()
+    const result = await this.http.post<any>(`${environment.apiUri}/auth/login`, user).toPromise();
+    if (result && result.access_token) {
+      window.localStorage.setItem('token', result.access_token);
+      return true;
+    }
+    return false;
   }
 
-  signUp(account: any) {
-    // simulando request pois ainda não existe backend implementado
-    return new Promise(resolve => {
-      resolve(true);
-    })
+  async signUp(account: any) {
+    const result = await this.http.post<any>(`${environment.apiUri}/users`, account).toPromise();
+    return result;
+  }
+
+  getAuthorizationToken() {
+    const token = window.localStorage.getItem('token');
+    return token;
   }
 }
